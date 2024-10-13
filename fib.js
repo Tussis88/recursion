@@ -13,9 +13,28 @@ function fibs(fibRepetitions) {
   return fibArray;
 }
 
+function betterFibs(n) {
+  arr = [0, 1];
+
+  if (n === 0) return [];
+  if (n === 1) return [1];
+
+  while (arr.length < n) {
+    arr.push(arr.at(-1) + arr.at(-2));
+  }
+  return arr;
+}
+
 console.log("for:");
 console.log(fibs(8));
 
+console.log("better for:");
+
+console.log(betterFibs(0));
+console.log(betterFibs(1));
+console.log(betterFibs(8));
+
+// didn`t know how to deal with the array inside the recursion so i came up with this idea
 function fibsRec(repetitions) {
   const arrayFib = [];
   function recursion(rep) {
@@ -36,5 +55,16 @@ function fibsRec(repetitions) {
   return arrayFib;
 }
 
+// looked for some solutions from other people and this one looked the better imho
+function fibsRec2(n, arr = [0, 1]) {
+  // the .slice() makes sure that the array get treated correctly in corner cases.
+  if (arr.length >= n) return arr.slice(0, n);
+  arr.push(arr.at(-1) + arr.at(-2));
+  return fibsRec2(n, arr);
+}
+
 console.log("recursive");
 console.log(fibsRec(8));
+
+console.log("recursive 2:");
+console.log(fibsRec2(1));

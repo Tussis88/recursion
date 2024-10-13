@@ -18,19 +18,22 @@ console.log(fibs(8));
 
 function fibsRec(repetitions) {
   const arrayFib = [];
-
-  function recursion(repetitions) {
-    if (repetitions < 2 && arrayFib.length < 2) {
-      console.log(repetitions);
+  function recursion(rep) {
+    if (rep === 0) {
       arrayFib.push(0);
+      return;
+    }
+    if (rep === 1) {
+      recursion(rep - 1);
       arrayFib.push(1);
       return;
     }
-
-    arrayFib.push(recursion(repetitions - 1) + recursion(repetitions - 2));
+    recursion(rep - 1);
+    arrayFib.push(arrayFib[rep - 1] + arrayFib[rep - 2]);
     return;
   }
-  recursion(repetitions);
+  recursion(repetitions - 1);
+  return arrayFib;
 }
 
 console.log("recursive");
